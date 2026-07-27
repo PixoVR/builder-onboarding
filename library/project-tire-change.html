@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name="robots" content="noindex, nofollow"><meta name='viewport' content='width=device-width, initial-scale=1'><title>Project 2 — Tire Change</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+       font-size: 16px; line-height: 1.55; color: #1a1d21; margin: 0; background: #fff; }
+.page { max-width: 860px; margin: 0 auto; padding: 24px 28px 60px; }
+.navbar { font-size: 13.5px; color: #5b6470; border-bottom: 1px solid #e2e6ea;
+          padding: 10px 28px; display: flex; gap: 16px; }
+.navbar a { color: #1f6feb; text-decoration: none; }
+h1 { font-size: 1.7em; margin: .8em 0 .4em; padding-bottom: .2em; border-bottom: 2px solid #e2e6ea; }
+h2 { font-size: 1.25em; margin: 1.5em 0 .4em; padding-bottom: .15em; border-bottom: 1px solid #eef1f4; }
+h3 { font-size: 1.1em; margin: 1.2em 0 .3em; }
+p, li { margin: .4em 0; }
+em { color: #555; }
+a { color: #1f6feb; text-decoration: none; word-break: break-word; }
+a:hover { text-decoration: underline; }
+code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .85em;
+       background: #f3f5f7; padding: 1px 5px; border-radius: 3px; }
+pre { background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px;
+      overflow-x: auto; font-size: .82em; line-height: 1.45; }
+pre code { background: none; padding: 0; font-size: inherit; }
+table { border-collapse: collapse; width: 100%; margin: .7em 0; font-size: .92em; display: block; overflow-x: auto; }
+th, td { border: 1px solid #dcdfe3; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #f5f6f8; font-weight: 600; }
+blockquote { margin: .7em 0; padding: .3em 1em; border-left: 3px solid #cbd5e1; color: #475569; }
+img { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 5px; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.6em 0; }
+.foot { margin-top: 40px; font-size: 12.5px; color: #8a93a0; border-top: 1px solid #eef1f4; padding-top: 10px; }
+</style></head><body><div class="navbar"><a href="index.html">&larr; Trial resources</a><a href="../index.html">Start here</a></div><div class='page'><h1>Project 2 — Tire Change</h1>
+<p><em>Reconciled to the as-built scenario · Updated June 23, 2026 · Sessions 1–2 (Project 1)</em></p>
+<blockquote>
+<p>This doc describes the <strong>scenario as actually built</strong> in the Tire Change book
+(<code>~/Documents/Builder101/Builder 101- TireChange.pixob</code>, 8 chapters). It supersedes the earlier
+outdoor/floor-jack/9-step draft, which was never built. The build is the source of truth.
+Trainer-facing build sequence: <code>tire-change-checkpoints.md</code>.</p>
+</blockquote>
+<hr />
+<h2>Overview</h2>
+<p>A single-Chapter training module that walks the learner through changing a wheel on a
+passenger vehicle raised on a <strong>two-post automotive lift</strong>, in an <strong>indoor garage</strong>. Eleven
+ordered steps, gated in sequence, with on-screen step tracking and per-step voiceover. The
+learner progresses by interacting with physical objects — the lift, the lug wrench, the
+wheels, and the lug nuts.</p>
+<p>This is Session 1–2's hands-on build — the program's first project. Participants follow along
+with the trainer and end up with a complete, playable, published experience by the end of Session 2.</p>
+<p>The garage shell is shared with the Hazard Recognition project — same walls, lighting,
+racks, and table. As of the July 24, 2026 split, the two scenarios ship as <strong>separate Books</strong>
+(<code>Builder 101- TireChange.pixob</code> and <code>Builder101_HazRec.pixob</code>), each carrying its own copy of
+the garage from the common ancestor — so "same room" is a shared lineage, not a shared file.</p>
+<hr />
+<h2>Why this scenario</h2>
+<ul>
+<li>Universally understood — no domain expertise required of any trainee</li>
+<li>Order-dependent procedure that maps cleanly onto a one-state-per-step model</li>
+<li>Discrete tool-to-target interactions (wrench on lug nuts, wheel on hub) that map cleanly
+  onto the Cause → Effect model</li>
+<li>No particles, fluids, or physics edge cases — buildable with the current Builder feature set</li>
+<li>Establishes the shared garage environment (Project 2, Hazard Recognition, reuses it later) —
+  one room, two experiences. Session 1 hands over the room pre-built so live time goes to logic,
+  not set dressing</li>
+</ul>
+<hr />
+<h2>Mechanics taught</h2>
+<table>
+<thead>
+<tr>
+<th>Mechanic</th>
+<th>When introduced</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spark vs. Instance, Traits, placement</td>
+<td>Session 1</td>
+</tr>
+<tr>
+<td>Map Editor + Map Explorer</td>
+<td>Session 1</td>
+</tr>
+<tr>
+<td>Cause → Effect → wire</td>
+<td>Session 1</td>
+</tr>
+<tr>
+<td>Edit vs. play mode</td>
+<td>Session 1</td>
+</tr>
+<tr>
+<td>Audio Config Spark</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>State Machine (Named) — object state</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>State Machine (Named) — procedure spine</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>Sub Graphs (wiring readability)</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>Step Manager as a visible step tracker</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>Screen Space UI + Crosshair</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>Chapter handoff (Change Chapter)</td>
+<td>Session 2</td>
+</tr>
+<tr>
+<td>Publish to Pixo Platform</td>
+<td>Session 2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Procedure (as built — 11 steps + completion)</h2>
+<p>The Step Manager exposes these as the learner-facing step list:</p>
+<ol>
+<li>Raise the lift</li>
+<li>Grab the wrench</li>
+<li>Use the wrench (loosen lug nuts)</li>
+<li>Replace the wrench</li>
+<li>Remove the old wheel</li>
+<li>Place the new wheel</li>
+<li>Replace the lug nuts</li>
+<li>Grab the wrench (second time)</li>
+<li>Tighten the lug nuts</li>
+<li>Return the wrench</li>
+<li>Lower the lift</li>
+<li>Lesson complete</li>
+</ol>
+<p>The procedure is <strong>linear</strong> — each step has a single outcome leading to the next. There is
+no wrong-order failure branching in the current build (see Open Questions).</p>
+<hr />
+<h2>Architecture</h2>
+<p>The logic is layered across two State Machines plus a Step Manager. This separation is the
+single most important thing the build teaches:</p>
+<ul>
+<li>
+<p><strong><code>Steps</code> State Machine (Named) — the procedure spine.</strong> Twelve named states, one per
+  procedure beat: <code>Lesson Start → Lift Raised → Wrench Grabbed 1 → Wrench Used 1 →
+  Wrench Replaced 1 → Old Wheel Removed → New Wheel Placed → Lug Nuts Replaced →
+  Wrench Grabbed 2 → Lug Nuts Tightened → Wrench Replaced (2) → Lift Lowered</code>. Each step's
+  work chain ends in a <strong>Go to Named State</strong> as its terminal node, per the recommended
+  beta pattern. This drives everything — including lift position, which the spine carries
+  via its <code>Lift Raised</code> / <code>Lift Lowered</code> states rather than a separate tracker.</p>
+</li>
+<li>
+<p><strong><code>Lug Nuts States</code> State Machine — lug-nut location.</strong> <code>On Wheel / On Table</code>.</p>
+</li>
+<li>
+<p><strong>Step Manager — the visible tracker.</strong> Each of its steps completes on a condition that
+  <strong>reads the <code>Steps</code> State Machine's current state</strong> (e.g., step "Use Wrench" completes when
+  the <code>Steps</code> machine is at <code>Wrench Used 1</code>). The Step Manager observes; the State Machine
+  drives. This is the race-safe configuration — it avoids the Step Manager polling defect
+  (PLATFORM-2212) because the transition runs synchronously in the State Machine's chain.</p>
+</li>
+</ul>
+<p>Each step also fires a voiceover clip (<code>VO_RaiseLift</code>, <code>VO_GrabWrench1</code>, and so on — 12
+total) on step entry, and the wiring is organized into <strong>Sub Graphs</strong> to stay readable.</p>
+<hr />
+<h2>Environment</h2>
+<p>Indoor garage: two-post lift, tool racks, work table, walls with a door, decals, interior
+lighting plus a sky/sun. Deliberately the same shell as Hazard Recognition — participants
+see how one environment supports two different training experiences.</p>
+<hr />
+<h2>Assets</h2>
+<p>PM provides a complete asset pack: sedan (intact and right-rear-wheel-removed variants),
+two-post lift, lug wrench, spare/replacement wheel, lug nuts. Same pack across every cohort.
+These are pre-placed in the checkpoint Books so Session 1 stays focused on the core model —
+learners do their first hands-on GLB import in Project 2 (Hazard Recognition), not here.</p>
+<hr />
+<h2>Stretch goals (if time allows in Session 2)</h2>
+<ul>
+<li>Wrong-order handling — a failure branch if the learner attempts a lift-down step while raised,
+  or vice versa (the <code>Steps</code> spine already tracks <code>Lift Raised</code> / <code>Lift Lowered</code> to gate this)</li>
+<li>Highlight Effect directing attention to the next correct tool or target</li>
+<li>Lug nut rotation animation during loosen/tighten</li>
+<li>Audio feedback on success/failure beats</li>
+<li>A summary screen in the completion Chapter</li>
+</ul>
+<hr />
+<h2>Open Questions</h2>
+<ul>
+<li>[ ] <strong>"Lower Lift" step completion condition reads <code>Lesson Start</code>, not <code>Lift Lowered</code></strong> —
+  looks like a leftover from duplicating an outcome. Verify in play mode whether the final
+  step completes; fix the condition if it stalls.</li>
+<li>[x] Checkpoint delivery: <strong>Chapters inside one Book</strong>, used as build snapshots (decided
+  June 24, 2026). The cross-Chapter durability concerns don't apply to snapshots — nothing plays
+  across the boundary (state-reset is moot) and PLATFORM-2218 only bites on reorder/delete, not on
+  duplication. Clone mechanics and gotchas verified against source; see
+  <code>tire-change-checkpoints.md</code>.</li>
+<li>[ ] Whether to teach wrong-order branching as a Session 2 stretch or cut it entirely</li>
+<li>[x] Book split (July 24, 2026) — Tire Change and Haz Rec are now separate <code>.pixob</code> Books
+  (<code>Builder 101- TireChange.pixob</code>, 8 chapters; <code>Builder101_HazRec.pixob</code>, 1 chapter). The old
+  combined "Builder 101 - HazRec" name is retired. See memory <code>reference_builder101_book_split</code>.</li>
+</ul><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-27 from the PM repo</div></div></body></html>

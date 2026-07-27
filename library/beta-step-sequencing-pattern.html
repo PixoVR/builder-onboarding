@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name="robots" content="noindex, nofollow"><meta name='viewport' content='width=device-width, initial-scale=1'><title>Beta Authoring Pattern: Sequential Steps with a State Machine</title><style>
+* { box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+       font-size: 16px; line-height: 1.55; color: #1a1d21; margin: 0; background: #fff; }
+.page { max-width: 860px; margin: 0 auto; padding: 24px 28px 60px; }
+.navbar { font-size: 13.5px; color: #5b6470; border-bottom: 1px solid #e2e6ea;
+          padding: 10px 28px; display: flex; gap: 16px; }
+.navbar a { color: #1f6feb; text-decoration: none; }
+h1 { font-size: 1.7em; margin: .8em 0 .4em; padding-bottom: .2em; border-bottom: 2px solid #e2e6ea; }
+h2 { font-size: 1.25em; margin: 1.5em 0 .4em; padding-bottom: .15em; border-bottom: 1px solid #eef1f4; }
+h3 { font-size: 1.1em; margin: 1.2em 0 .3em; }
+p, li { margin: .4em 0; }
+em { color: #555; }
+a { color: #1f6feb; text-decoration: none; word-break: break-word; }
+a:hover { text-decoration: underline; }
+code { font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace; font-size: .85em;
+       background: #f3f5f7; padding: 1px 5px; border-radius: 3px; }
+pre { background: #f6f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 14px;
+      overflow-x: auto; font-size: .82em; line-height: 1.45; }
+pre code { background: none; padding: 0; font-size: inherit; }
+table { border-collapse: collapse; width: 100%; margin: .7em 0; font-size: .92em; display: block; overflow-x: auto; }
+th, td { border: 1px solid #dcdfe3; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #f5f6f8; font-weight: 600; }
+blockquote { margin: .7em 0; padding: .3em 1em; border-left: 3px solid #cbd5e1; color: #475569; }
+img { max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 5px; }
+hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.6em 0; }
+.foot { margin-top: 40px; font-size: 12.5px; color: #8a93a0; border-top: 1px solid #eef1f4; padding-top: 10px; }
+</style></head><body><div class="navbar"><a href="index.html">&larr; Trial resources</a><a href="../index.html">Start here</a></div><div class='page'><h1>Beta Authoring Pattern: Sequential Steps with a State Machine</h1>
+<p><strong>Status:</strong> Recommended pattern for the closed beta.
+<strong>Audience:</strong> Trainer-facing. The "Authoring pattern" section below is written to be lifted directly into client-facing training; the "Why this pattern (trainer note)" section is internal context and should not go to clients as-is.</p>
+<hr />
+<h2>Authoring pattern</h2>
+<p>When a training experience follows a defined sequence of steps that the learner completes in order, build the sequence with a <strong>State Machine (Named)</strong> — one named state per step.</p>
+<p>This gives every step three predictable parts:</p>
+<ul>
+<li><strong>Step entry</strong> — an <strong>On State</strong> Cause for the step's state. Wire anything that should happen when the step begins (prompts, highlights, enabling the objects the learner needs).</li>
+<li><strong>Step logic</strong> — the Cause-Effect chain the learner drives during the step (interact, grab, collide, move objects, and so on).</li>
+<li><strong>Step completion</strong> — a <strong>Go to Named State</strong> Effect as the <strong>last node in the chain</strong>, pointing at the next step's state.</li>
+</ul>
+<p>Because completion is the last thing the chain does, every effect before it finishes first. A move that runs over time completes, its follow-on effects fire, and only then does the step advance. The transition is in the same chain as the work, so it always runs in order.</p>
+<h3>Setup</h3>
+<ol>
+<li>Open the Spark Browser. Under Config Sparks, drag a <strong>State Machine (Named)</strong> into the Configs panel.</li>
+<li>Rename the Instance for clarity — for example, "Procedure".</li>
+<li>Add one named state per step. Name them after the steps themselves ("inspect-panel", "close-valve", "confirm") so the Behaviors tab reads as the procedure.</li>
+</ol>
+<h3>Wiring each step</h3>
+<p>For a step named <code>close-valve</code> that the learner completes by interacting with a valve, after which the valve animates shut and a confirmation highlight turns on:</p>
+<pre><code>On State (close-valve) → Converse (NPC, &quot;Close the valve.&quot;)
+
+Interacted (valve) → Move (valve, to closed)
+                   → Highlight (confirm marker, on)
+                   → Go to Named State (confirm)
+</code></pre>
+<p>The <code>Go to Named State</code> node is the terminal node for the step. Place it last, after every effect the step needs to run.</p>
+<h3>Branching</h3>
+<p>A step can lead to more than one next step. Wire a separate chain for each outcome, each ending in its own <code>Go to Named State</code>:</p>
+<pre><code>Interacted (correct tool) → Go to Named State (use-tool)
+Interacted (wrong tool)   → Converse (NPC, &quot;Not that one.&quot;) → Go to Named State (retry)
+</code></pre>
+<h3>Completing the procedure</h3>
+<p>The final step's chain ends in a <strong>Change Chapter</strong> Effect (to advance to a debrief) rather than another <code>Go to Named State</code>.</p>
+<hr />
+<h2>Things to know</h2>
+<ul>
+<li><strong>The first state fires at Chapter load.</strong> The <strong>On State</strong> Cause for the first named state fires automatically when the Chapter starts, before any interaction. Use it to set up the opening step.</li>
+<li><strong>Transitioning to the current state does nothing.</strong> A <code>Go to Named State</code> that targets the state already active does not re-fire its <strong>On State</strong>. Always advance to a different state.</li>
+<li><strong>State does not persist across Chapters.</strong> Keep a full procedure within one Chapter, or carry a value forward with a persistent Datum Spark if the next Chapter needs it.</li>
+<li><strong>No learner-facing step checklist.</strong> This pattern drives the logic, but it does not display a "Step 2 of 5" list to the learner. If a scenario needs a visible step list on screen, build that UI explicitly. (Verify whether any beta scenario actually requires this before relying on the pattern.)</li>
+</ul>
+<hr />
+<h2>Warning: do not reorder or delete states after wiring</h2>
+<p>State references in a Named State Machine resolve by <strong>position in the states list, not by name</strong> — despite the names you see in the dropdowns. Reordering or deleting a state silently re-points every <code>Go to Named State</code> and <code>On State Enter</code> that targeted a state at or after the change. The wiring still shows a valid state name, so the corruption is invisible until the procedure runs in the wrong order. (Runtime bug: PLATFORM-2218.)</p>
+<p>This compounds with a second limitation: the list editor's Remove button only ever deletes the <strong>last</strong> state — there is no per-row delete (PLATFORM-2219). Deleting any other step forces you to drag it to the end first, and that reorder is exactly what corrupts references.</p>
+<p><strong>Practical guidance for the beta:</strong></p>
+<ul>
+<li><strong>Lock the step list before wiring.</strong> Decide the full sequence of states first. Add states in final order, then wire. Reordering after wiring is the trap.</li>
+<li><strong>To remove a middle step, neutralize it in place — do not delete it.</strong> Leave the slot where it is (preserving every index), rename it to something like <code>UNUSED</code>, and unwire its <code>On State Enter</code>. The sequence passes through a harmless no-op and not a single reference shifts. Only do a true delete when it is the genuine last state and nothing points at it.</li>
+<li><strong>If you must reorder or delete:</strong> afterward, open every <code>Go to Named State</code> and <code>On State Enter</code> from the change point onward and re-select the correct state by name. Cross-check against your written step list — the dropdowns will look fine but hold the wrong target.</li>
+</ul>
+<hr />
+<h2>Why this pattern (trainer note — internal)</h2>
+<p>Two reasons to teach this rather than Step Manager during the beta:</p>
+<p><strong>1. It avoids a known Step Manager defect.</strong> Step Manager currently completes a step by polling, one frame after the triggering interaction, on a path separate from the behavior graph. When the same interaction both completes the step and drives a multi-frame or chained effect, the step can advance before the chain finishes, and the remaining effects are silently dropped. Tracked as PLATFORM-2212. The State Machine has no such race: its transition runs synchronously, in chain order.</p>
+<p><strong>2. It will not change under the learner.</strong> The State Machine is stable and is not on the redesign roadmap. Everything taught with it survives untouched. Step Manager is being reshaped (see <code>context/step-manager-race-design-brief.html</code>), so anything taught with it now risks being re-taught later.</p>
+<h3>Forward compatibility</h3>
+<p>This pattern is the future Step Manager model in everything but name. When the redesign lands, the swap is close to one-for-one:</p>
+<table>
+<thead>
+<tr>
+<th>Beta pattern (State Machine)</th>
+<th>After Step Manager redesign</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one named state per step</td>
+<td>one step</td>
+</tr>
+<tr>
+<td><strong>On State</strong> Cause</td>
+<td>step entry / on-enter</td>
+</tr>
+<tr>
+<td><strong>Go to Named State</strong> as the last node</td>
+<td>outcome node (terminal sink)</td>
+</tr>
+<tr>
+<td>final step → <strong>Change Chapter</strong></td>
+<td>final outcome → Chapter advance</td>
+</tr>
+</tbody>
+</table>
+<p>The graph shape does not change. The transition stays the last node in the chain. Rebuilding into the new Step Manager is re-housing the same structure in the panel, not relearning how to think about steps. Teaching the "completion is the last node in the chain" habit now is what makes that later swap nearly free.</p>
+<h3>What you give up versus Step Manager</h3>
+<ul>
+<li>No automatic outcome table — transitions are wired by hand.</li>
+<li>No panel-level view of how steps connect; the structure lives in the states and the graph.</li>
+<li>No auto-provisioned nodes; you add each <code>Go to Named State</code> yourself.</li>
+</ul>
+<p>All acceptable for the beta, and all recovered when the redesigned Step Manager arrives.</p><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-27 from the PM repo</div></div></body></html>

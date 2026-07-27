@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixo Builder — Self-Guided Syllabus</title>
+<style>
+  :root {
+    --ink: #1c1c1e;
+    --muted: #6b6b70;
+    --line: #e2e2e5;
+    --accent: #b4452e;
+    --bg: #ffffff;
+    --zebra: #faf8f6;
+    --card: #faf8f6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    margin: 0;
+    padding: 48px 32px 80px;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 6px;
+  }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 28px; font-size: 14px; }
+  h2 {
+    font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 38px 0 12px;
+    padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  h3 { font-size: 17px; margin: 22px 0 6px; }
+  p { margin: 0 0 14px; }
+  .lede { font-size: 15.5px; }
+  .project-tag {
+    display: inline-block; font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; margin-bottom: 2px;
+  }
+  .unit {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 18px 20px; margin: 16px 0;
+  }
+  .unit h3 { margin-top: 0; }
+  .unit .label {
+    font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 14px 0 4px;
+  }
+  .unit ul { margin: 4px 0 0; padding-left: 20px; }
+  .unit li { margin: 0 0 5px; }
+  .unit p { margin: 0; }
+  .steps { margin: 4px 0 0; padding-left: 20px; }
+  .steps li { margin: 0 0 6px; }
+  a { color: var(--accent); }
+  .note {
+    margin: 16px 0 0; padding: 14px 16px; background: #fdf6ec;
+    border-left: 3px solid #c98a2b; border-radius: 4px; font-size: 13.5px;
+  }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
+           font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body><style>.lib-nav{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13.5px;color:#5b6470;border-bottom:1px solid #e2e6ea;padding:10px 28px;display:flex;gap:16px}.lib-nav a{color:#1f6feb;text-decoration:none}</style><div class="lib-nav"><a href="index.html">&larr; Trial resources</a><a href="../index.html">Start here</a></div>
+<div class="wrap">
+  <p class="eyebrow">Pixo Builder · Self-Guided Syllabus</p>
+  <h1>Building Your First Two Modules</h1>
+  <p class="sub">A self-paced path through two complete training modules — a guided procedure and a scored assessment</p>
+
+  <p class="lede">
+    This syllabus walks you through building two complete, playable training modules in Pixo
+    Builder — <strong>Tire Change</strong>, an ordered step-by-step procedure, and
+    <strong>Hazard Recognition</strong>, a randomized spot-the-hazard assessment. Build them in
+    order: Tire Change teaches the core model, and Hazard Recognition builds advanced features on
+    top of it. By the end you'll have two experiences you built yourself — and the patterns behind
+    almost anything you'll want to author next.
+  </p>
+
+  <h2>Before you start</h2>
+  <ul>
+    <li><strong>Builder installed</strong> and opening, with your account signed in.</li>
+    <li><strong>A Pixo Platform account</strong> — it's how you'll publish and test your finished modules.</li>
+    <li><strong>The two design documents</strong> open alongside you — they're the spec for what you're
+      building. Read each one before you build that project:
+      <a href="tire-change-step-list.html">Tire Change step list</a> ·
+      <a href="haz-rec-design-doc.html">Hazard Recognition design document</a>.</li>
+    <li><strong>The documentation</strong> — each unit below lists what to read. The docs do the
+      detailed teaching; this syllabus is the map.</li>
+  </ul>
+  <p>Work at your own pace. Each unit ends with something playable, so you always have a checkpoint
+    to return to. If a unit's concepts feel new, read its listed docs before building — they're chosen
+    to make that unit achievable.</p>
+
+  <h2>Project 1 · Tire Change — a guided procedure</h2>
+  <p>An ordered procedure: the learner changes a wheel on a lifted vehicle, one gated step at a time.
+    This project teaches the entire core model of Builder.</p>
+
+  <div class="unit">
+    <p class="project-tag">Unit 1</p>
+    <h3>Foundations &amp; your first interaction</h3>
+    <p>Get to the moment where you drag something into a scene, wire it yourself, press play, and watch
+      it work.</p>
+    <p class="label">What you'll build</p>
+    <ol class="steps">
+      <li>Open the garage scene and move around it in Map Explorer.</li>
+      <li>Drag a Spark into the scene to create an Instance; find it in the Instances pane.</li>
+      <li>Set an exact value in the Traits Panel and watch it update.</li>
+      <li>Wire your first behavior: <em>Interacted → Highlight</em>. Test it in play mode.</li>
+      <li>Add a second Effect on the same Cause (Play Audio), then wire the lift to raise on interact.</li>
+    </ol>
+    <p class="label">New concepts</p>
+    <p>Spark vs. Instance · Cause → Effect → wire · Traits · edit mode vs. play mode · the Audio Config Spark.</p>
+    <p class="label">Read</p>
+    <p>Getting Started Guide · First Success Walkthrough · Spark vs. Instance · Spark types overview ·
+      Modifiers reference · Edit Mode and Play Mode.</p>
+  </div>
+
+  <div class="unit">
+    <p class="project-tag">Unit 2</p>
+    <h3>The procedure spine, tracking &amp; publishing</h3>
+    <p>Turn the scene into a real, ordered procedure that knows where the learner is — then publish it
+      and test it on a device.</p>
+    <p class="label">What you'll build</p>
+    <ol class="steps">
+      <li>A State Machine as the <strong>procedure spine</strong> — one state per step, in order.</li>
+      <li>Each step's effects hanging off the spine: animation, movement, grabbing and releasing tools,
+        collision/trigger detection, rotation, mesh swaps, and attaching objects.</li>
+      <li>Sub Graphs to keep the wiring readable as it grows.</li>
+      <li>A Step Manager that shows the learner which step they're on.</li>
+      <li>Screen-space UI and a crosshair.</li>
+      <li>Publish to the Pixo Platform, then test the finished module on your device.</li>
+    </ol>
+    <p class="label">New concepts</p>
+    <p>State Machine (object state, then the procedure spine) · Sub Graphs · Step Manager as an observer ·
+      Screen Space UI + Crosshair · Change Chapter · publishing and lifecycle stages (Debug → QA → UAT → Release).</p>
+    <p class="label">Read</p>
+    <p>Common Patterns (State Machines) · Step Manager reference · Sub Graphs reference ·
+      Publishing &amp; Lifecycle Stages · Config Sparks reference.</p>
+  </div>
+
+  <div class="note">
+    <strong>The pattern travels.</strong> A three-step procedure and a thirty-step procedure are the
+    same shape. Once Tire Change works end to end, you own the pattern behind every sequential training
+    experience you'll build.
+  </div>
+
+  <h2>Project 2 · Hazard Recognition — a scored assessment</h2>
+  <p>The same garage, a different kind of training. Five spots around the room; three are hazards each
+    run, chosen at random. The learner clicks what they think is unsafe and gets scored. This project is
+    the same primitives from Project 1, turned to a new shape — and it introduces the advanced features.</p>
+
+  <div class="unit">
+    <p class="project-tag">Unit 3</p>
+    <h3>Import, parallel state &amp; feedback</h3>
+    <p>Instead of one state machine stepping through a sequence, run several at once — one per spot —
+      each tracking whether the learner has caught it.</p>
+    <p class="label">What you'll build</p>
+    <ol class="steps">
+      <li>Import your first GLB asset and place it in the scene.</li>
+      <li>Place the five spots, each with a hazard version and a safe version at the same position.</li>
+      <li>On one spot, a four-state machine: safe/hazard × clicked/unclicked.</li>
+      <li>Two wired outcomes off one click — a correct catch and a false positive.</li>
+      <li>Chapter Started initialization so the scene comes up in a known state.</li>
+    </ol>
+    <p class="label">New concepts</p>
+    <p>Importing assets (GLB → Spark) · parallel State Machines · branching feedback (correct vs. incorrect) ·
+      Chapter Started.</p>
+    <p class="label">Read</p>
+    <p>Importing Assets Guide · Common Patterns (parallel State Machines) · Randomizer / Modifiers reference ·
+      Datum Spark reference.</p>
+  </div>
+
+  <div class="unit">
+    <p class="project-tag">Unit 4</p>
+    <h3>Randomization, scoring &amp; world-space UI</h3>
+    <p>Make the scene different every run, keep score, and show the result — then publish your second,
+      richer module.</p>
+    <p class="label">What you'll build</p>
+    <ol class="steps">
+      <li>A Randomizer that makes exactly three of the five spots hazards at the start of each run.</li>
+      <li>Three Datums that keep score: hazards to find, hazards caught, and mistakes.</li>
+      <li>Datum Viewers that display those values live.</li>
+      <li>World-space UI — a Billboard with Text and a Button — for instructions and the end-of-run score.</li>
+      <li>The catch/mistake pattern extended across all five spots, and a Done button that reveals the tally.</li>
+      <li>Publish and test on your device.</li>
+    </ol>
+    <p class="label">New concepts</p>
+    <p>Randomizer (non-deterministic scenes) · Datum Sparks &amp; Datum Viewers · world-space UI with
+      Symbol Sparks (Billboard / Button / Text).</p>
+    <p class="label">Read</p>
+    <p>Datum Spark reference · Symbol Sparks reference · Randomizer / Modifiers reference ·
+      Common Patterns (scoring &amp; feedback).</p>
+  </div>
+
+  <div class="note">
+    <strong>Testing a random scene.</strong> Because the hazard set changes every run, play it several
+    times — you're confirming the behavior holds no matter which three spots come up.
+  </div>
+
+  <h2>What's next — your own module</h2>
+  <p>
+    With both modules built, you've used the full core model and every advanced feature: state machines
+    (sequential and parallel), branching logic, randomization, scoring with Datums, and world-space UI.
+    The natural next step is to build a short module of your own, with your own assets — pick a real task
+    from your work, sketch a quick design document for it first (the two you read are the model), then
+    build it, publish it, and test it on a device. That's the whole skill.
+  </p>
+
+  <footer>
+    Self-guided syllabus · pairs with the Tire Change and Hazard Recognition design documents and the
+    Pixo Builder documentation · draft.
+  </footer>
+</div>
+</body>
+</html>
