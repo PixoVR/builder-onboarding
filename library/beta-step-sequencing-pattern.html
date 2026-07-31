@@ -70,8 +70,8 @@ Interacted (wrong tool)   → Converse (NPC, &quot;Not that one.&quot;) → Go t
 </ul>
 <hr />
 <h2>Warning: do not reorder or delete states after wiring</h2>
-<p>State references in a Named State Machine resolve by <strong>position in the states list, not by name</strong> — despite the names you see in the dropdowns. Reordering or deleting a state silently re-points every <code>Go to Named State</code> and <code>On State Enter</code> that targeted a state at or after the change. The wiring still shows a valid state name, so the corruption is invisible until the procedure runs in the wrong order. (Runtime bug: PLATFORM-2218.)</p>
-<p>This compounds with a second limitation: the list editor's Remove button only ever deletes the <strong>last</strong> state — there is no per-row delete (PLATFORM-2219). Deleting any other step forces you to drag it to the end first, and that reorder is exactly what corrupts references.</p>
+<p>State references in a Named State Machine resolve by <strong>position in the states list, not by name</strong> — despite the names you see in the dropdowns. Reordering or deleting a state silently re-points every <code>Go to Named State</code> and <code>On State Enter</code> that targeted a state at or after the change. The wiring still shows a valid state name, so the corruption is invisible until the procedure runs in the wrong order. (Runtime bug: BLDR-97.)</p>
+<p>This compounds with a second limitation: the list editor's Remove button only ever deletes the <strong>last</strong> state — there is no per-row delete (BLDR-96). Deleting any other step forces you to drag it to the end first, and that reorder is exactly what corrupts references.</p>
 <p><strong>Practical guidance for the beta:</strong></p>
 <ul>
 <li><strong>Lock the step list before wiring.</strong> Decide the full sequence of states first. Add states in final order, then wire. Reordering after wiring is the trap.</li>
@@ -81,7 +81,7 @@ Interacted (wrong tool)   → Converse (NPC, &quot;Not that one.&quot;) → Go t
 <hr />
 <h2>Why this pattern (trainer note — internal)</h2>
 <p>Two reasons to teach this rather than Step Manager during the beta:</p>
-<p><strong>1. It avoids a known Step Manager defect.</strong> Step Manager currently completes a step by polling, one frame after the triggering interaction, on a path separate from the behavior graph. When the same interaction both completes the step and drives a multi-frame or chained effect, the step can advance before the chain finishes, and the remaining effects are silently dropped. Tracked as PLATFORM-2212. The State Machine has no such race: its transition runs synchronously, in chain order.</p>
+<p><strong>1. It avoids a known Step Manager defect.</strong> Step Manager currently completes a step by polling, one frame after the triggering interaction, on a path separate from the behavior graph. When the same interaction both completes the step and drives a multi-frame or chained effect, the step can advance before the chain finishes, and the remaining effects are silently dropped. Tracked as BLDR-77. The State Machine has no such race: its transition runs synchronously, in chain order.</p>
 <p><strong>2. It will not change under the learner.</strong> The State Machine is stable and is not on the redesign roadmap. Everything taught with it survives untouched. Step Manager is being reshaped (see <code>context/step-manager-race-design-brief.html</code>), so anything taught with it now risks being re-taught later.</p>
 <h3>Forward compatibility</h3>
 <p>This pattern is the future Step Manager model in everything but name. When the redesign lands, the swap is close to one-for-one:</p>
@@ -118,4 +118,4 @@ Interacted (wrong tool)   → Converse (NPC, &quot;Not that one.&quot;) → Go t
 <li>No panel-level view of how steps connect; the structure lives in the states and the graph.</li>
 <li>No auto-provisioned nodes; you add each <code>Go to Named State</code> yourself.</li>
 </ul>
-<p>All acceptable for the beta, and all recovered when the redesigned Step Manager arrives.</p><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-27 from the PM repo</div></div></body></html>
+<p>All acceptable for the beta, and all recovered when the redesigned Step Manager arrives.</p><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-30 from the PM repo</div></div></body></html>

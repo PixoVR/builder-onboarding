@@ -159,7 +159,7 @@ single most important thing the build teaches:</p>
   <strong>reads the <code>Steps</code> State Machine's current state</strong> (e.g., step "Use Wrench" completes when
   the <code>Steps</code> machine is at <code>Wrench Used 1</code>). The Step Manager observes; the State Machine
   drives. This is the race-safe configuration — it avoids the Step Manager polling defect
-  (PLATFORM-2212) because the transition runs synchronously in the State Machine's chain.</p>
+  (BLDR-77) because the transition runs synchronously in the State Machine's chain.</p>
 </li>
 </ul>
 <p>Each step also fires a voiceover clip (<code>VO_RaiseLift</code>, <code>VO_GrabWrench1</code>, and so on — 12
@@ -193,11 +193,11 @@ learners do their first hands-on GLB import in Project 2 (Hazard Recognition), n
   step completes; fix the condition if it stalls.</li>
 <li>[x] Checkpoint delivery: <strong>Chapters inside one Book</strong>, used as build snapshots (decided
   June 24, 2026). The cross-Chapter durability concerns don't apply to snapshots — nothing plays
-  across the boundary (state-reset is moot) and PLATFORM-2218 only bites on reorder/delete, not on
+  across the boundary (state-reset is moot) and BLDR-97 only bites on reorder/delete, not on
   duplication. Clone mechanics and gotchas verified against source; see
   <code>tire-change-checkpoints.md</code>.</li>
 <li>[ ] Whether to teach wrong-order branching as a Session 2 stretch or cut it entirely</li>
 <li>[x] Book split (July 24, 2026) — Tire Change and Haz Rec are now separate <code>.pixob</code> Books
   (<code>Builder 101- TireChange.pixob</code>, 8 chapters; <code>Builder101_HazRec.pixob</code>, 1 chapter). The old
   combined "Builder 101 - HazRec" name is retired. See memory <code>reference_builder101_book_split</code>.</li>
-</ul><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-27 from the PM repo</div></div></body></html>
+</ul><div class='foot'>Pixo Builder trial resources &middot; generated 2026-07-30 from the PM repo</div></div></body></html>
