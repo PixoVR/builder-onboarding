@@ -166,8 +166,6 @@
     </tbody>
   </table>
 
-  <p class="note"><b>Authoring note:</b> Each of steps 1&ndash;10 advances to the next via a <code>StateEquals</code> outcome that watches a named State Machine state. Step 11 (Lower Lift) is the terminal step and carries no completion outcome &mdash; reaching it <em>is</em> the end of the sequence, so none is needed. Any end-of-procedure action (completion message, score, next chapter) belongs on the final step's <b>OnEnter</b>, since OnExit never fires on the last step.</p>
-
   <footer>
     Step names and completion signals extracted directly from the book's Step Manager plan.
     "What to do" descriptions authored for this example; the book's own Description fields are blank.
